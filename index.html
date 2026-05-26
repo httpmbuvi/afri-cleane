@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Afri Cleaning Services — Your Space, Our Responsibility</title>
+<meta name="description" content="Premium residential and commercial cleaning services. Trusted, professional and eco-friendly. Book your cleaning today." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300a86b'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='white' font-family='Arial' font-weight='800'%3EA%3C/text%3E%3C/svg%3E" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: {
+    fontFamily: { sans: ['Plus Jakarta Sans','system-ui','sans-serif'], display: ['Space Grotesk','sans-serif'] },
+    colors: {
+      brand: { green:'#00a86b', greenDark:'#007a4d', purple:'#6b2ea3', purpleDark:'#4a1f73', ink:'#0a0a0a' }
+    }
+  }}
+}
+</script>
+<style>
+  html { scroll-behavior:smooth }
+  .gradient-text{background:linear-gradient(90deg,#00a86b,#6b2ea3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .btn-grad{background:linear-gradient(90deg,#00a86b,#6b2ea3)}
+  .hero{background-image:linear-gradient(rgba(10,10,10,.72),rgba(10,10,10,.72)),url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center}
+  .card{transition:transform .3s, box-shadow .3s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 20px 40px -20px rgba(107,46,163,.4)}
+</style>
+</head>
+<body class="font-sans bg-white text-brand-ink dark:bg-brand-ink dark:text-white">
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-white/80 dark:bg-black/60 border-b border-black/5 dark:border-white/10">
+  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-2 font-display font-bold text-lg">
+      <span class="w-9 h-9 rounded-xl btn-grad grid place-items-center text-white">A</span>
+      <span>Afri <span class="gradient-text">Cleaning</span></span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium">
+      <a href="#home" class="hover:text-brand-green">Home</a>
+      <a href="#services" class="hover:text-brand-green">Services</a>
+      <a href="#about" class="hover:text-brand-green">About</a>
+      <a href="#gallery" class="hover:text-brand-green">Gallery</a>
+      <a href="#testimonials" class="hover:text-brand-green">Reviews</a>
+      <a href="#faq" class="hover:text-brand-green">FAQ</a>
+      <a href="#contact" class="hover:text-brand-green">Contact</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button id="theme" class="w-9 h-9 rounded-lg border border-black/10 dark:border-white/20 grid place-items-center" aria-label="Toggle theme">🌓</button>
+      <a href="#book" class="hidden sm:inline-flex btn-grad text-white px-4 py-2 rounded-lg text-sm font-semibold">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero min-h-screen flex items-center text-white pt-16">
+  <div class="max-w-7xl mx-auto px-5 py-24 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/20">Premium Cleaning · Kenya</span>
+      <h1 class="font-display text-4xl md:text-6xl font-bold mt-4 leading-tight">Your Space,<br><span class="gradient-text">Our Responsibility</span></h1>
+      <p class="mt-5 text-lg text-white/80 max-w-lg">Residential and commercial cleaning done right — by trained, vetted professionals using eco-friendly products.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#book" class="btn-grad px-6 py-3 rounded-xl font-semibold">Book a Cleaning</a>
+        <a href="#services" class="px-6 py-3 rounded-xl font-semibold border border-white/30 hover:bg-white/10">Our Services</a>
+      </div>
+      <div class="mt-10 grid grid-cols-3 gap-4 max-w-md">
+        <div><div class="text-2xl font-bold gradient-text">500+</div><div class="text-xs text-white/70">Happy Clients</div></div>
+        <div><div class="text-2xl font-bold gradient-text">7+</div><div class="text-xs text-white/70">Years</div></div>
+        <div><div class="text-2xl font-bold gradient-text">24/7</div><div class="text-xs text-white/70">Support</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-24 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto">
+      <h2 class="font-display text-3xl md:text-5xl font-bold">Our <span class="gradient-text">Services</span></h2>
+      <p class="mt-3 text-black/60 dark:text-white/60">Comprehensive cleaning solutions tailored to your space.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+      <!-- service cards -->
+      <script id="svc-tpl"></script>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 px-5 bg-gray-50 dark:bg-white/5">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=80" alt="Afri Cleaning team" class="rounded-2xl shadow-xl" loading="lazy"/>
+    <div>
+      <h2 class="font-display text-3xl md:text-5xl font-bold">About <span class="gradient-text">Afri Cleaning</span></h2>
+      <p class="mt-4 text-black/70 dark:text-white/70">We're a Kenyan-owned cleaning company committed to delivering luxurious, eco-friendly cleaning that exceeds expectations. From homes to corporate spaces, our trained crew brings consistency, trust and a spotless finish every time.</p>
+      <div class="mt-6 grid grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-white dark:bg-black/40 border border-black/5 dark:border-white/10"><div class="font-bold text-brand-green">Vetted Staff</div><p class="text-sm mt-1">Background-checked & trained</p></div>
+        <div class="p-4 rounded-xl bg-white dark:bg-black/40 border border-black/5 dark:border-white/10"><div class="font-bold text-brand-purple">Eco Products</div><p class="text-sm mt-1">Safe for family & pets</p></div>
+        <div class="p-4 rounded-xl bg-white dark:bg-black/40 border border-black/5 dark:border-white/10"><div class="font-bold text-brand-green">On-Time</div><p class="text-sm mt-1">Punctual every visit</p></div>
+        <div class="p-4 rounded-xl bg-white dark:bg-black/40 border border-black/5 dark:border-white/10"><div class="font-bold text-brand-purple">Insured</div><p class="text-sm mt-1">Fully covered service</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="py-24 px-5">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="font-display text-3xl md:text-5xl font-bold text-center">Our <span class="gradient-text">Work</span></h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12" id="gallery-grid"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="py-24 px-5 bg-gray-50 dark:bg-white/5">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="font-display text-3xl md:text-5xl font-bold text-center">What Clients <span class="gradient-text">Say</span></h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-12" id="reviews"></div>
+  </div>
+</section>
+
+<!-- BOOK + CONTACT -->
+<section id="book" class="py-24 px-5">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10">
+    <div id="contact">
+      <h2 class="font-display text-3xl md:text-5xl font-bold">Book Your <span class="gradient-text">Cleaning</span></h2>
+      <p class="mt-3 text-black/60 dark:text-white/60">Fill in the form and we'll confirm via WhatsApp within minutes.</p>
+      <div class="mt-6 space-y-3 text-sm">
+        <p>📞 <a href="tel:+254769059505" class="font-semibold hover:text-brand-green">+254 769 059 505</a></p>
+        <p>💬 <a href="https://wa.me/254769059505" class="font-semibold hover:text-brand-green">WhatsApp us</a></p>
+        <p>📍 Nairobi, Kenya</p>
+      </div>
+    </div>
+    <form id="bookForm" class="p-6 md:p-8 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/40 shadow-xl space-y-4">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input required name="name" placeholder="Full name" class="px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent"/>
+        <input required name="phone" placeholder="Phone number" class="px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent"/>
+      </div>
+      <input required type="email" name="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent"/>
+      <select required name="service" class="w-full px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent">
+        <option value="">Select a service</option>
+        <option>Residential Cleaning</option><option>Commercial Cleaning</option>
+        <option>Carpet & Sofa Cleaning</option><option>Post-Construction</option>
+        <option>Move In / Move Out</option><option>Deep Cleaning</option>
+      </select>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input required type="date" name="date" class="px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent"/>
+        <input name="address" placeholder="Address / Area" class="px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent"/>
+      </div>
+      <textarea name="notes" rows="3" placeholder="Additional notes" class="w-full px-4 py-3 rounded-lg border border-black/10 dark:border-white/20 bg-transparent"></textarea>
+      <button class="w-full btn-grad text-white py-3 rounded-lg font-semibold">Send Booking via WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 px-5 bg-gray-50 dark:bg-white/5">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-display text-3xl md:text-5xl font-bold text-center">Frequently <span class="gradient-text">Asked</span></h2>
+    <div class="mt-10 space-y-3" id="faqs"></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="py-16 px-5">
+  <div class="max-w-3xl mx-auto p-8 rounded-2xl btn-grad text-white text-center">
+    <h3 class="font-display text-2xl font-bold">Get cleaning tips & offers</h3>
+    <form onsubmit="event.preventDefault();alert('Thanks for subscribing!');this.reset();" class="mt-5 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input type="email" required placeholder="Your email" class="flex-1 px-4 py-3 rounded-lg text-black"/>
+      <button class="px-6 py-3 rounded-lg bg-black font-semibold">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-white/80 pt-16 pb-8 px-5">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
+    <div>
+      <div class="flex items-center gap-2 font-display font-bold text-white text-lg"><span class="w-9 h-9 rounded-xl btn-grad grid place-items-center">A</span> Afri Cleaning</div>
+      <p class="mt-3 text-sm">Your Space, Our Responsibility.</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-white mb-3">Quick Links</h4>
+      <ul class="space-y-2 text-sm"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul>
+    </div>
+    <div>
+      <h4 class="font-bold text-white mb-3">Services</h4>
+      <ul class="space-y-2 text-sm"><li><a href="#services">Residential</a></li><li><a href="#services">Commercial</a></li><li><a href="#services">Carpet & Sofa</a></li><li><a href="#services">Deep Cleaning</a></li></ul>
+    </div>
+    <div>
+      <h4 class="font-bold text-white mb-3">Connect</h4>
+      <div class="flex gap-3 text-2xl">
+        <a href="https://wa.me/254769059505" aria-label="WhatsApp">💬</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+      </div>
+      <p class="mt-4 text-sm">+254 769 059 505</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/10 text-center text-sm">
+    © <span id="yr"></span> Afri Cleaning Services. All rights reserved.
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/254769059505?text=Hi%20Afri%20Cleaning%2C%20I%27d%20like%20to%20book%20a%20service" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-green-500 text-white grid place-items-center text-2xl shadow-2xl hover:scale-110 transition" aria-label="Chat on WhatsApp">💬</a>
+
+<script>
+// Theme
+const t=document.getElementById('theme');
+if(localStorage.theme==='dark'||(!('theme'in localStorage)&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');
+t.onclick=()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light'};
+
+// Services
+const services=[
+ ['🏠','Residential Cleaning','Spotless homes, apartments and villas.'],
+ ['🏢','Commercial Cleaning','Offices, retail and corporate spaces.'],
+ ['🛋️','Carpet & Sofa','Deep-extraction stain & odor removal.'],
+ ['🚧','Post-Construction','Dust-free, move-in ready finishes.'],
+ ['📦','Move In / Out','Complete handover cleaning service.'],
+ ['✨','Deep Cleaning','Top-to-bottom seasonal refresh.']
+];
+document.querySelector('#services .grid').innerHTML=services.map(([i,t,d])=>`
+<div class="card p-7 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/40">
+  <div class="w-14 h-14 rounded-xl btn-grad grid place-items-center text-2xl">${i}</div>
+  <h3 class="font-display font-bold text-xl mt-5">${t}</h3>
+  <p class="mt-2 text-sm text-black/60 dark:text-white/60">${d}</p>
+  <a href="#book" class="inline-block mt-4 text-sm font-semibold text-brand-purple dark:text-brand-green">Book now →</a>
+</div>`).join('');
+
+// Gallery
+const imgs=['1556909114-f6e7ad7d3136','1581578017093-cd30fce4eeb7','1527515637462-cff94eecc1ac','1581578731548-c64695cc6952','1584622650111-993a426fbf0a','1558317374-067fb5f30001'];
+document.getElementById('gallery-grid').innerHTML=imgs.map(i=>`<img src="https://images.unsplash.com/photo-${i}?auto=format&fit=crop&w=700&q=70" alt="Cleaning" class="rounded-xl aspect-[4/3] object-cover hover:scale-105 transition" loading="lazy"/>`).join('');
+
+// Reviews
+const reviews=[
+ ['Sarah K.','Homeowner','Exceptional service! My house has never looked this good.'],
+ ['James M.','Office Manager','Reliable and professional — they handle our entire building.'],
+ ['Achieng O.','Landlord','Move-out cleaning was flawless. Highly recommended.']
+];
+document.getElementById('reviews').innerHTML=reviews.map(([n,r,q])=>`
+<div class="p-6 rounded-2xl bg-white dark:bg-black/40 border border-black/10 dark:border-white/10">
+  <div class="text-yellow-400">★★★★★</div>
+  <p class="mt-3 italic">"${q}"</p>
+  <div class="mt-4 font-bold">${n}</div><div class="text-xs text-black/60 dark:text-white/60">${r}</div>
+</div>`).join('');
+
+// FAQ
+const faqs=[
+ ['What areas do you serve?','We currently serve Nairobi and surrounding areas.'],
+ ['Do you bring your own supplies?','Yes — eco-friendly products and all equipment included.'],
+ ['How do I pay?','M-Pesa, cash, or bank transfer after service.'],
+ ['Are you insured?','Yes, our team is fully insured and background-checked.']
+];
+document.getElementById('faqs').innerHTML=faqs.map(([q,a])=>`
+<details class="p-5 rounded-xl bg-white dark:bg-black/40 border border-black/10 dark:border-white/10">
+  <summary class="font-semibold cursor-pointer">${q}</summary>
+  <p class="mt-2 text-sm text-black/70 dark:text-white/70">${a}</p>
+</details>`).join('');
+
+// Booking form -> WhatsApp + save locally for admin
+document.getElementById('bookForm').onsubmit=e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const data={name:f.get('name'),phone:f.get('phone'),email:f.get('email'),service:f.get('service'),date:f.get('date'),address:f.get('address'),notes:f.get('notes')||'',status:'pending',createdAt:new Date().toISOString(),id:Date.now()};
+  const list=JSON.parse(localStorage.getItem('afri_bookings')||'[]');list.unshift(data);localStorage.setItem('afri_bookings',JSON.stringify(list));
+  const msg=`*New Booking - Afri Cleaning*%0A%0AName: ${data.name}%0APhone: ${data.phone}%0AEmail: ${data.email}%0AService: ${data.service}%0ADate: ${data.date}%0AAddress: ${data.address}%0ANotes: ${data.notes||'-'}`;
+  window.open(`https://wa.me/254769059505?text=${msg}`,'_blank');
+  e.target.reset();alert('Booking submitted!');
+};
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

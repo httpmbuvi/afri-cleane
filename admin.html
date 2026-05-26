@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Admin · Afri Cleaning Services</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{green:'#10B981',purple:'#7C3AED',ink:'#0B0B0F'}},fontFamily:{display:['Sora','sans-serif'],sans:['Inter','sans-serif']}}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,sans-serif}.font-display{font-family:Sora,sans-serif}</style>
+</head>
+<body class="bg-slate-50 dark:bg-brand-ink text-black dark:text-white min-h-screen">
+
+<!-- Auth screen -->
+<div id="auth" class="min-h-screen grid place-items-center px-4 hidden">
+  <div class="w-full max-w-md bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl p-8 shadow-xl">
+    <div class="text-center mb-6">
+      <div class="inline-block w-12 h-12 rounded-xl bg-gradient-to-br from-brand-green to-brand-purple mb-3"></div>
+      <h1 class="font-display text-2xl font-bold">Afri Cleaning Admin</h1>
+      <p class="text-sm text-black/60 dark:text-white/60" id="authSub">Sign in to manage bookings</p>
+    </div>
+    <form id="authForm" class="space-y-3">
+      <input name="email" type="email" required placeholder="Email" class="w-full px-4 py-3 rounded-lg bg-slate-100 dark:bg-white/10 border border-black/10 dark:border-white/10"/>
+      <input name="password" type="password" required minlength="6" placeholder="Password (min 6 chars)" class="w-full px-4 py-3 rounded-lg bg-slate-100 dark:bg-white/10 border border-black/10 dark:border-white/10"/>
+      <button class="w-full py-3 rounded-lg bg-gradient-to-r from-brand-green to-brand-purple text-white font-semibold" id="authBtn">Sign in</button>
+    </form>
+    <p id="authErr" class="text-sm text-red-500 mt-3 hidden"></p>
+    <button id="toggleMode" class="mt-4 text-xs text-black/60 dark:text-white/60 hover:underline w-full text-center">Need an account? Sign up</button>
+    <a href="index.html" class="block mt-4 text-xs text-center text-black/40 dark:text-white/40 hover:underline">← Back to website</a>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dash" class="hidden">
+  <header class="border-b border-black/10 dark:border-white/10 bg-white dark:bg-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+      <div>
+        <div class="font-display font-bold">Afri Cleaning · Admin</div>
+        <div class="text-xs text-black/60 dark:text-white/60" id="meEmail"></div>
+      </div>
+      <div class="flex gap-2">
+        <button id="themeBtn" class="px-3 py-1.5 rounded-lg border border-black/10 dark:border-white/10 text-sm">🌙</button>
+        <button id="logoutBtn" class="px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 text-sm font-medium">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8">
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="stats"></div>
+
+    <!-- Tabs -->
+    <div class="flex gap-2 mb-4 border-b border-black/10 dark:border-white/10">
+      <button data-tab="bookings" class="tab px-4 py-2 font-medium border-b-2 border-brand-green">Bookings</button>
+      <button data-tab="users" class="tab px-4 py-2 font-medium border-b-2 border-transparent text-black/60 dark:text-white/60">Users</button>
+    </div>
+
+    <!-- Bookings tab -->
+    <section id="tab-bookings">
+      <div class="flex flex-col sm:flex-row gap-3 mb-4">
+        <input id="search" placeholder="Search name, phone, email..." class="flex-1 px-4 py-2 rounded-lg bg-white dark:bg-white/5 border border-black/10 dark:border-white/10"/>
+        <select id="statusFilter" class="px-4 py-2 rounded-lg bg-white dark:bg-white/5 border border-black/10 dark:border-white/10">
+          <option value="all">All statuses</option><option value="pending">Pending</option>
+          <option value="in_progress">In progress</option><option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="overflow-x-auto bg-white dark:bg-white/5 rounded-xl border border-black/10 dark:border-white/10">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 dark:bg-white/5 text-left">
+            <tr><th class="p-3">Client</th><th class="p-3">Service</th><th class="p-3">Date</th><th class="p-3">Contact</th><th class="p-3">Status</th><th class="p-3 text-right">Actions</th></tr>
+          </thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Users tab -->
+    <section id="tab-users" class="hidden">
+      <div class="bg-white dark:bg-white/5 rounded-xl border border-black/10 dark:border-white/10 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 dark:bg-white/5 text-left"><tr><th class="p-3">Email</th><th class="p-3">Role</th><th class="p-3">Created</th><th class="p-3 text-right">Actions</th></tr></thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+// Theme
+if(localStorage.theme==='dark')document.documentElement.classList.add('dark');
+
+// ===== Auth (client-side, localStorage based) =====
+// NOTE: This is suitable for internal/demo use. For production, use a real backend.
+const USERS_KEY='afri_users', SESSION_KEY='afri_session';
+async function hash(s){const b=new TextEncoder().encode(s);const h=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+const users=()=>JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
+const saveUsers=u=>localStorage.setItem(USERS_KEY,JSON.stringify(u));
+const session=()=>JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
+
+let mode='signin';
+const authEl=document.getElementById('auth'),dashEl=document.getElementById('dash');
+const authForm=document.getElementById('authForm'),authBtn=document.getElementById('authBtn'),authSub=document.getElementById('authSub'),authErr=document.getElementById('authErr'),toggleMode=document.getElementById('toggleMode');
+
+// If no users exist, first signup becomes admin
+function refreshAuthUI(){
+  const noUsers=users().length===0;
+  if(noUsers){mode='signup';authSub.textContent='Create the first admin account';authBtn.textContent='Create admin account';toggleMode.classList.add('hidden')}
+  else{toggleMode.classList.remove('hidden');authSub.textContent=mode==='signin'?'Sign in to manage bookings':'Create a new account';authBtn.textContent=mode==='signin'?'Sign in':'Sign up';toggleMode.textContent=mode==='signin'?'Need an account? Sign up':'Have an account? Sign in'}
+}
+toggleMode.onclick=()=>{mode=mode==='signin'?'signup':'signin';authErr.classList.add('hidden');refreshAuthUI()};
+
+authForm.onsubmit=async e=>{
+  e.preventDefault();authErr.classList.add('hidden');
+  const f=new FormData(e.target);const email=f.get('email').toLowerCase().trim();const pw=await hash(f.get('password'));
+  const list=users();
+  if(mode==='signup'||list.length===0){
+    if(list.find(u=>u.email===email))return showErr('Account already exists');
+    const role=list.length===0?'admin':'user';
+    list.push({email,pw,role,createdAt:new Date().toISOString()});saveUsers(list);
+    localStorage.setItem(SESSION_KEY,JSON.stringify({email,role}));init();
+  }else{
+    const u=list.find(x=>x.email===email&&x.pw===pw);
+    if(!u)return showErr('Invalid email or password');
+    localStorage.setItem(SESSION_KEY,JSON.stringify({email:u.email,role:u.role}));init();
+  }
+};
+function showErr(m){authErr.textContent=m;authErr.classList.remove('hidden')}
+
+document.getElementById('logoutBtn').onclick=()=>{localStorage.removeItem(SESSION_KEY);init()};
+document.getElementById('themeBtn').onclick=()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light'};
+
+// ===== Dashboard =====
+function init(){
+  const s=session();
+  if(!s){authEl.classList.remove('hidden');dashEl.classList.add('hidden');refreshAuthUI();return}
+  authEl.classList.add('hidden');dashEl.classList.remove('hidden');
+  document.getElementById('meEmail').textContent=s.email+' · '+s.role;
+  render();
+}
+
+// Tabs
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('border-brand-green');x.classList.add('border-transparent','text-black/60','dark:text-white/60')});
+  b.classList.add('border-brand-green');b.classList.remove('border-transparent','text-black/60','dark:text-white/60');
+  document.getElementById('tab-bookings').classList.toggle('hidden',b.dataset.tab!=='bookings');
+  document.getElementById('tab-users').classList.toggle('hidden',b.dataset.tab!=='users');
+});
+
+document.getElementById('search').oninput=render;
+document.getElementById('statusFilter').onchange=render;
+
+const STATUS_STYLES={pending:'bg-yellow-100 text-yellow-700',in_progress:'bg-blue-100 text-blue-700',completed:'bg-green-100 text-green-700',cancelled:'bg-red-100 text-red-700'};
+
+function getBookings(){return JSON.parse(localStorage.getItem('afri_bookings')||'[]')}
+function saveBookings(b){localStorage.setItem('afri_bookings',JSON.stringify(b))}
+
+function render(){
+  const all=getBookings();
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const sf=document.getElementById('statusFilter').value;
+  const filtered=all.filter(b=>(sf==='all'||b.status===sf)&&(!q||(b.name+b.phone+b.email+b.address).toLowerCase().includes(q)));
+
+  // Stats
+  const stats=[
+    {l:'Total',v:all.length,c:'from-brand-green to-brand-purple'},
+    {l:'Pending',v:all.filter(b=>b.status==='pending').length,c:'from-yellow-400 to-orange-500'},
+    {l:'Completed',v:all.filter(b=>b.status==='completed').length,c:'from-emerald-400 to-green-600'},
+    {l:'In Progress',v:all.filter(b=>b.status==='in_progress').length,c:'from-blue-400 to-indigo-600'},
+  ];
+  document.getElementById('stats').innerHTML=stats.map(s=>`<div class="bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl p-4"><div class="text-xs uppercase tracking-wider text-black/60 dark:text-white/60">${s.l}</div><div class="text-3xl font-bold bg-gradient-to-r ${s.c} bg-clip-text text-transparent">${s.v}</div></div>`).join('');
+
+  // Bookings table
+  document.getElementById('bookingsBody').innerHTML=filtered.length?filtered.map(b=>`
+    <tr class="border-t border-black/5 dark:border-white/10">
+      <td class="p-3"><div class="font-medium">${esc(b.name)}</div><div class="text-xs text-black/60 dark:text-white/60">${esc(b.address)}</div></td>
+      <td class="p-3">${esc(b.service)}</td>
+      <td class="p-3 text-xs">${esc(b.date)}</td>
+      <td class="p-3 text-xs"><div>${esc(b.email)}</div><div class="text-black/60 dark:text-white/60">${esc(b.phone)}</div></td>
+      <td class="p-3"><span class="px-2 py-1 rounded text-xs font-medium ${STATUS_STYLES[b.status]||''}">${b.status}</span></td>
+      <td class="p-3 text-right">
+        <select onchange="updateStatus(${b.id},this.value)" class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-white/10 border border-black/10 dark:border-white/10">
+          ${['pending','in_progress','completed','cancelled'].map(s=>`<option value="${s}" ${b.status===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+        <button onclick="del(${b.id})" class="ml-1 text-red-500 text-xs px-2 py-1">🗑</button>
+      </td>
+    </tr>`).join(''):`<tr><td colspan="6" class="p-8 text-center text-black/60 dark:text-white/60">No bookings yet. Submissions from the website will appear here.</td></tr>`;
+
+  // Users
+  const me=session();
+  document.getElementById('usersBody').innerHTML=users().map(u=>`
+    <tr class="border-t border-black/5 dark:border-white/10">
+      <td class="p-3">${esc(u.email)}</td>
+      <td class="p-3"><span class="px-2 py-1 rounded text-xs ${u.role==='admin'?'bg-purple-100 text-purple-700':'bg-slate-100 text-slate-700'}">${u.role}</span></td>
+      <td class="p-3 text-xs">${new Date(u.createdAt).toLocaleString()}</td>
+      <td class="p-3 text-right">${u.email!==me.email&&me.role==='admin'?`<button onclick="delUser('${esc(u.email)}')" class="text-red-500 text-xs">Remove</button>`:''}</td>
+    </tr>`).join('');
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+window.updateStatus=(id,status)=>{const b=getBookings();const i=b.findIndex(x=>x.id===id);if(i>-1){b[i].status=status;saveBookings(b);render()}};
+window.del=id=>{if(!confirm('Delete this booking?'))return;saveBookings(getBookings().filter(b=>b.id!==id));render()};
+window.delUser=email=>{if(!confirm('Remove this user?'))return;saveUsers(users().filter(u=>u.email!==email));render()};
+
+init();
+</script>
+</body>
+</html>
